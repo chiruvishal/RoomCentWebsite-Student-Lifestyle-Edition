@@ -1,8 +1,9 @@
 .navbar {
-  background-color: #6f4e3742 !important;
+  padding-left: 5%;
+  background-color: #0E86D4!important;
 }
 .navbar .navbar-brand {
-  color: #6f4e37 !important;
+  color: white !important;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -14,4 +15,18 @@
 .navbar h6 {
   margin-top: 0px;
   margin-right: 20px;
+}
+
+.ant-dropdown-menu {
+  background-color: #0E86D4;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.ant-dropdown-menu-item {
+  color: white;
+}
+
+.ant-dropdown-menu-item:hover {
+  background-color: #0E86D4;
 }

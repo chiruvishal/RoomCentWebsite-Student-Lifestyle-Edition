@@ -17,24 +17,54 @@
   box-shadow: 0 0 3px gray;
   margin-bottom: 10px;
 }
-/* transection page */
 
-/* antd icons */
+@media screen and (max-width: 767px) {
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 2%;
+  }
+
+  .filter-tab {
+  }
+
+  .switch-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
 
 .switch-icons {
+  display: flex;
   border: 1px solid rgba(0, 0, 0, 0.677);
   border-radius: 5px;
   padding: 10px 15px;
 }
 
-.anticon svg {
+.switch-icons .anticon svg {
   font-size: 20px;
   cursor: pointer;
 }
 
+/* Active Icons */
 .active-icon {
-  color: black;
+  color: blue;
+  transition: color 0.3s ease;
 }
+
+.active-icon:hover {
+  color: blue;
+}
+
+
 .inactive-icon {
   color: gray;
 }

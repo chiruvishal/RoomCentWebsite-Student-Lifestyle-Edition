@@ -1,16 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
 .register-page {
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+  background-image: url(https://e1.pxfuel.com/desktop-wallpaper/468/14/desktop-wallpaper-best-for-website-backgrounds-best-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; /* Use "cover" to scale the background image to cover the entire container */
+  overflow-x: hidden;
 }
+
+
 .register-form {
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 20px;
   width: 30%;
+  align-items: center;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .register-page {
+    height: fit-content;
+    margin: 0%;
+  }
+  .register-form {
+    height: max-content;
+    width: max-content;
+    margin: 0%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
 
 .register-form h2 {
   margin-top: 10px;

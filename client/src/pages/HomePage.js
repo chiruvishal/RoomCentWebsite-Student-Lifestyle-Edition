@@ -11,6 +11,9 @@ import axios from "axios";
 import Spinner from "./../components/Spinner";
 import moment from "moment";
 import Analytics from "../components/Analytics";
+import Dropdownm from "./Dropdown";
+import './Homepage.css';
+
 const { RangePicker } = DatePicker;
 
 const HomePage = () => {
@@ -66,8 +69,32 @@ const HomePage = () => {
       ),
     },
   ];
-
   //getall transactions
+  const [numberOfPeople, setNumberOfPeople] = useState(0);
+  const [peopleNames, setPeopleNames] = useState([]);
+
+  useEffect(() => {
+    const getUserDataById = async () => {
+      try {
+        const userq = JSON.parse(localStorage.getItem("user"));
+        const resq = await axios.post("/users/getdata", {
+          useridq: userq._id,
+        });
+  
+        const { numberOfPeople, peopleNames } = resq.data; // Access the response data
+  
+        setNumberOfPeople(resq.data.numberOfPeople);
+setPeopleNames(resq.data.peopleNames);
+
+      } catch (error) {
+        // Handle error if the request fails
+        console.error(error);
+      }
+    };
+  
+    getUserDataById();
+  }, []);
+  
 
   //useEffect Hook
   useEffect(() => {
@@ -75,7 +102,7 @@ const HomePage = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         setLoading(true);
-        const res = await axios.post("/api/v1/transections/get-transection", {
+        const res = await axios.post("/transections/get-transection", {
           userid: user._id,
           frequency,
           selectedDate,
@@ -94,11 +121,13 @@ const HomePage = () => {
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/api/v1/transections/delete-transection", {
+      await axios.post("/transections/delete-transection", {
         transacationId: record._id,
       });
       setLoading(false);
       message.success("Transaction Deleted!");
+      window.location.reload(); // Refresh the page
+
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -112,7 +141,7 @@ const HomePage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/api/v1/transections/edit-transection", {
+        await axios.post("/transections/edit-transection", {
           payload: {
             ...values,
             userId: user._id,
@@ -121,8 +150,10 @@ const HomePage = () => {
         });
         setLoading(false);
         message.success("Transaction Updated Successfully");
+        window.location.reload(); // Refresh the page
+
       } else {
-        await axios.post("/api/v1/transections/add-transection", {
+        await axios.post("/transections/add-transection", {
           ...values,
           userid: user._id,
         });
@@ -139,6 +170,23 @@ const HomePage = () => {
 
   return (
     <Layout>
+     <div class="containert">
+  <div class="imaget">
+    <img src="https://i.postimg.cc/WbWkr3yK/Cool-Background-with-room-with-college-students-confused-how-to-manage-their-expenses-2.png" alt="Welcome Image" />
+  </div>
+  <div class="contentt">
+    <h2 class="titlet">
+      Welcome to RoomCents: Student Lifestyle Edition
+    </h2>
+    <p class="descriptiont">
+To get started, simply create an account and log in. Once you're in, you can easily input your expenses, categorize them, and assign them to specific dates. RoomCents provides a user-friendly interface where you can view your transactions, filter them based on frequency or type, and even set custom date ranges.
+But that's not all! RoomCents goes beyond transaction tracking. Our powerful analytics feature provides you with meaningful insights into your spending patterns. You can visualize your expenses through interactive charts, identify areas where you can save money, and make informed decisions about your Room.
+Whether you're a college student living in a shared room or an individual looking to manage your finances effectively, RoomCents is here to simplify your financial journey.
+    </p>
+  </div>
+</div>
+<Dropdownm/>
+
       {loading && <Spinner />}
       <div className="filters">
         <div>
@@ -160,8 +208,8 @@ const HomePage = () => {
           <h6>Select Type</h6>
           <Select value={type} onChange={(values) => setType(values)}>
             <Select.Option value="all">ALL</Select.Option>
-            <Select.Option value="income">INCOME</Select.Option>
-            <Select.Option value="expense">EXPENSE</Select.Option>
+            <Select.Option value="income">INROOM_EXPENSES</Select.Option>
+            <Select.Option value="expense">OTHER EXPENSE</Select.Option>
           </Select>
         </div>
         <div className="switch-icons">
@@ -189,9 +237,14 @@ const HomePage = () => {
       </div>
       <div className="content">
         {viewData === "table" ? (
-          <Table columns={columns} dataSource={allTransection} />
+          <Table columns={columns} dataSource={allTransection} className="responsive-table"/>
         ) : (
-          <Analytics allTransection={allTransection} />
+          <Analytics
+  allTransection={allTransection}
+  numberOfPeople={numberOfPeople}
+  peopleNames={peopleNames}
+/>
+
         )}
       </div>
       <Modal
@@ -210,21 +263,21 @@ const HomePage = () => {
           </Form.Item>
           <Form.Item label="type" name="type">
             <Select>
-              <Select.Option value="income">Income</Select.Option>
-              <Select.Option value="expense">Expense</Select.Option>
+              <Select.Option value="income">InRoom Expenses</Select.Option>
+              <Select.Option value="expense">Other Expenses</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Category" name="category">
             <Select>
-              <Select.Option value="salary">Salary</Select.Option>
-              <Select.Option value="tip">Tip</Select.Option>
-              <Select.Option value="project">Project</Select.Option>
-              <Select.Option value="food">Food</Select.Option>
-              <Select.Option value="movie">Movie</Select.Option>
-              <Select.Option value="bills">Bills</Select.Option>
-              <Select.Option value="medical">Medical</Select.Option>
-              <Select.Option value="fee">Fee</Select.Option>
-              <Select.Option value="tax">TAX</Select.Option>
+              <Select.Option value="Room-Rent">Room-Rent</Select.Option>
+              <Select.Option value="Electricity">Electricity</Select.Option>
+              <Select.Option value="Groceries">Groceries</Select.Option>
+              <Select.Option value="Eating Out">Eating Out</Select.Option>
+              <Select.Option value="WIFI Bill">WIFI Bill</Select.Option>
+              <Select.Option value="Utilities">Utilities</Select.Option>
+              <Select.Option value="HouseHold Items">HouseHold Items</Select.Option>
+              <Select.Option value="Cleaning Supplies">Cleaning Supplies</Select.Option>
+              <Select.Option value="Transportation">Transportation</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Date" name="date">
