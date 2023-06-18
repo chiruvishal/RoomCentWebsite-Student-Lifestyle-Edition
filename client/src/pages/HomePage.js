@@ -178,7 +178,7 @@ setPeopleNames(resq.data.peopleNames);
     <h2 class="titlet">
       Welcome to RoomCents: Student Lifestyle Edition
     </h2>
-    <p class="descriptiont">
+    <p class="descriptiont">Inspired From RealLife Events and My College Life.
 To get started, simply create an account and log in. Once you're in, you can easily input your expenses, categorize them, and assign them to specific dates. RoomCents provides a user-friendly interface where you can view your transactions, filter them based on frequency or type, and even set custom date ranges.
 But that's not all! RoomCents goes beyond transaction tracking. Our powerful analytics feature provides you with meaningful insights into your spending patterns. You can visualize your expenses through interactive charts, identify areas where you can save money, and make informed decisions about your Room.
 Whether you're a college student living in a shared room or an individual looking to manage your finances effectively, RoomCents is here to simplify your financial journey.
