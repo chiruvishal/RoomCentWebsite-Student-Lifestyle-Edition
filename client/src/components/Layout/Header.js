@@ -14,7 +14,7 @@ const Header = () => {
     const getUserDataById = async () => {
       try {
         const userq = JSON.parse(localStorage.getItem("user"));
-        const resq = await axios.post("/users/getdata", {
+        const resq = await axios.post("/api/v1/users/getdata", {
           useridq: userq._id,
         });
 
