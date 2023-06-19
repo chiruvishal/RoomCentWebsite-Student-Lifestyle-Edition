@@ -1,5 +1,5 @@
 {
-  "name": "RoomCents: Student Lifestyle Edition",
+  "name": "roomcents-student-lifestyle-edition",
   "version": "1.0.0",
   "description": "expanse tracker app",
   "main": "server.js",
