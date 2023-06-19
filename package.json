@@ -1,5 +1,5 @@
 {
-  "name": "Expanse-Management-System",
+  "name": "RoomCents: Student Lifestyle Edition",
   "version": "1.0.0",
   "description": "expanse tracker app",
   "main": "server.js",
@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm start\" \"npm run client\" "
   },
   "keywords": [],
-  "author": "Techinfoyt",
+  "author": "MCV",
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
