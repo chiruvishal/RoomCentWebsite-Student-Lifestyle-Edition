@@ -77,7 +77,7 @@ const HomePage = () => {
     const getUserDataById = async () => {
       try {
         const userq = JSON.parse(localStorage.getItem("user"));
-        const resq = await axios.post("/users/getdata", {
+        const resq = await axios.post("/api/v1/users/getdata", {
           useridq: userq._id,
         });
   
@@ -102,7 +102,7 @@ setPeopleNames(resq.data.peopleNames);
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         setLoading(true);
-        const res = await axios.post("/transections/get-transection", {
+        const res = await axios.post("/api/v1/transections/get-transection", {
           userid: user._id,
           frequency,
           selectedDate,
@@ -121,7 +121,7 @@ setPeopleNames(resq.data.peopleNames);
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/transections/delete-transection", {
+      await axios.post("/api/v1/transections/delete-transection", {
         transacationId: record._id,
       });
       setLoading(false);
@@ -141,7 +141,7 @@ setPeopleNames(resq.data.peopleNames);
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/transections/edit-transection", {
+        await axios.post("/api/v1/transections/edit-transection", {
           payload: {
             ...values,
             userId: user._id,
@@ -153,7 +153,7 @@ setPeopleNames(resq.data.peopleNames);
         window.location.reload(); // Refresh the page
 
       } else {
-        await axios.post("/transections/add-transection", {
+        await axios.post("/api/v1/transections/add-transection", {
           ...values,
           userid: user._id,
         });

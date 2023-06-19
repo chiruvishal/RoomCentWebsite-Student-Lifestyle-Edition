@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,7 +14,7 @@ const Register = () => {
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      const { data } = await axios.post("/users/register", {
+      const { data } = await axios.post("/api/v1/users/register", {
         ...values,
         numberOfPeople,
         peopleNames: names,
@@ -46,6 +46,12 @@ const Register = () => {
     setNumberOfPeople(numberOfPeople + 1);
     setNames([...names, ""]);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>
